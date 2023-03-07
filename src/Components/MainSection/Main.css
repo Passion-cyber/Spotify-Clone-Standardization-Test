@@ -1,0 +1,56 @@
+.main-container{
+    width: 60%;
+    height: 100vh;
+    border: 1px solid blue;
+    padding: 0 1rem;
+}
+
+.search-bar{
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.inputField{
+    width: 400px;
+    padding: 10px 34px;
+    border-radius: 2.5rem;
+    border: none;
+}
+
+input:focus{
+    outline: none;
+}
+
+input::placeholder{
+    color: gray;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+/* Trending Section */
+.trending .trending-text{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.trending-zone{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.trending-zone .trending-header{
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+
+.trending-zone .trending-icons{
+font-size: 1.5rem;
+font-weight: 300;
+}
+
+.icon-section{
+    display: flex;
+    align-items: center;
+}

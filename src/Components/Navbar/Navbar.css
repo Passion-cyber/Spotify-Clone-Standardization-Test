@@ -1,0 +1,84 @@
+.navbar-container {
+  position: relative;
+  border: 1px solid red;
+  background-color: var(--white-color);
+  width: 20%;
+  height: 100vh;
+  padding: 10px;
+}
+
+.navigation {
+  position: relative;
+}
+
+.navigation h2 {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.individual-cards {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 1rem 1.5rem;
+  border-radius: 0.7rem;
+  gap: 2rem;
+  cursor: pointer;
+  max-width: 90%;
+  margin: 10px 0px;
+  font-size: 1rem;
+}
+
+.individual-cards:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.individual-cards.active {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.navbar-profile {
+  border-top: 2px solid gray;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-profile .image {
+  width: 40px;
+  height: 40px;
+  border: 1px solid red;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.nav-profile-icon{
+  /* align-self: flex-end; */
+  margin-left: 7rem;
+}
+
+.navbar-text {
+  letter-spacing: 2px;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+}
+
+.header-card {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 1rem 1.5rem;
+  gap: 2rem;
+  max-width: 90%;
+  margin-top: 20px;
+}
+
+.header-card .icon-text {
+  color: brown;
+  font-size: 1.7rem;
+}
