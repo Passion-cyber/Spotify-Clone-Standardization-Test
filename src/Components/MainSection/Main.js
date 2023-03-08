@@ -1,31 +1,37 @@
 import React from "react";
 import "./Main.css";
-import { BsArrowLeft } from "react-icons/bs";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight, BsFire } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
-import { BsFire } from "react-icons/bs";
 import { AiOutlineRight } from "react-icons/ai";
 import PlaylistCards from "./PlaylistCards";
+import PlaylistTitleCard from "./PlaylistTitleCard";
 
 const Main = () => {
   return (
-    <div className="main-container">
-      <div className="search-bar">
-        <p className="left-arrow">
-          <BsArrowLeft />
-        </p>
-        <p className="right-arrow">
-          <BsArrowRight />
-        </p>
-        <div className="input-address">
-          <RiSearchLine />
-          <input
-            type="search"
-            className="inputField"
-            placeholder="Search for artists, songs and ..."
-          />
+    <main className="main-container">
+      <section className="search-bar">
+        <div className="search-container">
+          <div className="search-icons">
+            <p className="left-arrow">
+              <BsArrowLeft />
+            </p>
+            <p className="right-arrow">
+              <BsArrowRight />
+            </p>
+          </div>
+          <div className="input-address" tabIndex={0}>
+            <span className="search-button">
+              {" "}
+              <RiSearchLine />{" "}
+            </span>
+            <input
+              type="text"
+              className="inputField"
+              placeholder="Search for artists, songs and ..."
+            />
+          </div>
         </div>
-      </div>
+      </section>
 
       <section className="trending">
         <h2 className="trending-text">
@@ -63,8 +69,14 @@ const Main = () => {
       </section>
 
       <section className="my-playlist">
-        <h2 className="playlist-text">My Playlist</h2>
-        <PlaylistCards
+        <div className="trending-zone">
+          <h2 className="trending-header">My Playlist</h2>
+          <div className="icon-section">
+            <h3 className="trending-icons"> Show All</h3>
+          </div>
+        </div>
+
+        <PlaylistTitleCard
           number={"#"}
           title={"TITLE"}
           artist={"ARTIST"}
@@ -72,44 +84,61 @@ const Main = () => {
           album={"ALBUM"}
         />
 
-        <PlaylistCards
-          number={"1"}
-          title={"Addict"}
-          artist={"Kizz Daniel"}
-          time={"03:24"}
-          album={"Barnabas"}
-        />
+        <section className="main-scrollbar">
+          <PlaylistCards
+            number={"1"}
+            title={"Addict"}
+            artist={"Kizz Daniel"}
+            time={"03:24"}
+            album={"Barnabas"}
+          />
 
-        <PlaylistCards
-          number={"2"}
-          title={"Seasons"}
-          artist={"6LACK ft Khalid"}
-          time={"03:44"}
-          album={"East Atlanta Love Letter"}
-        />
-        <PlaylistCards
-          number={"3"}
-          title={"Common Person"}
-          artist={"Burna Boy"}
-          time={"03:32"}
-          album={"Love Dahmini"}
-        />
-        <PlaylistCards
-          number={"4"}
-          title={"Joha"}
-          artist={"Asake"}
-          time={"03:34"}
-          album={"MMWTV"}
-        />
-        <PlaylistCards
-          number={"5"}
-          title={"Soso"}
-          artist={"Omah Lay"}
-          time={"02:59"}
-          album={"Boy Alone"}
-        />
+          <PlaylistCards
+            number={"2"}
+            title={"Seasons"}
+            artist={"6LACK ft Khalid"}
+            time={"03:44"}
+            album={"East Atlanta Love Letter"}
+          />
+          <PlaylistCards
+            number={"3"}
+            title={"Common Person"}
+            artist={"Burna Boy"}
+            time={"03:32"}
+            album={"Love Dahmini"}
+          />
+          <PlaylistCards
+            number={"4"}
+            title={"Joha"}
+            artist={"Asake"}
+            time={"03:34"}
+            album={"MMWTV"}
+          />
+          <PlaylistCards
+            number={"5"}
+            title={"Soso"}
+            artist={"Omah Lay"}
+            time={"02:59"}
+            album={"Boy Alone"}
+          />
+          <PlaylistCards
+            number={"5"}
+            title={"Soso"}
+            artist={"Omah Lay"}
+            time={"02:59"}
+            album={"Boy Alone"}
+          />
+          <PlaylistCards
+            number={"5"}
+            title={"Soso"}
+            artist={"Omah Lay"}
+            time={"02:59"}
+            album={"Boy Alone"}
+          />
+        </section>
       </section>
-    </div>
+      <section className="play-station"></section>
+    </main>
   );
 };
 

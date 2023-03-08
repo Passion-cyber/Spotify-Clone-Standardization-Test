@@ -1,28 +1,34 @@
 import React from "react";
 import NavbarCards from "./NavbarCards";
 import Navbarlogo from "./Navbarlogo";
-import { AiFillHome } from "react-icons/ai";
-import { GiChart } from "react-icons/gi";
-import { AiOutlineCompass } from "react-icons/ai";
+import { AiFillHome, AiOutlineCompass } from "react-icons/ai";
+import { GiChart, GiSelfLove } from "react-icons/gi";
 import { TbTopologyStarRing3 } from "react-icons/tb";
-import { MdOutlineNewspaper } from "react-icons/md";
+import { MdOutlineNewspaper, MdOutlineEventNote } from "react-icons/md";
 import { HiOutlineCalendar } from "react-icons/hi";
-import { MdOutlineEventNote } from "react-icons/md";
-import { GiSelfLove } from "react-icons/gi";
-import { BsFillPeopleFill } from "react-icons/bs";
-import { BsStar } from "react-icons/bs";
+import { BsFillPeopleFill, BsStar } from "react-icons/bs";
 import { GrTextAlignRight } from "react-icons/gr";
 import { FaChevronRight } from "react-icons/fa";
-import './Navbar.css'
+import tracker from "../Assets/chydel-bro.JPG";
+import "./Navbar.css";
 
-const Navbar = () => {
-
+const Navbar = ({ setToken }) => {
+  const logout = () => {
+    setToken(null);
+    window.localStorage.removeItem("spotifyTKN");
+  };
   return (
     <div className="navbar-container">
       <div className="navigation">
-        <h2><GrTextAlignRight/></h2>   
+        <i>
+          <GrTextAlignRight />
+        </i>
       </div>
-      <Navbarlogo title={"Passion-Cyber"} icon={<TbTopologyStarRing3 />} />
+      <Navbarlogo
+        title={"Passion"}
+        text={"Cyber"}
+        icon={<TbTopologyStarRing3 />}
+      />
       <NavbarCards title={"Home"} icon={<AiFillHome />} />
       <NavbarCards title={"Trends"} icon={<GiChart />} />
       <NavbarCards title={"Feed"} icon={<AiOutlineCompass />} />
@@ -35,11 +41,14 @@ const Navbar = () => {
       <NavbarCards title={"Artist"} icon={<BsFillPeopleFill />} />
       <NavbarCards title={"Album"} icon={<BsStar />} />
 
-      <div className="navbar-profile">
-        <div className="image"></div>
-        <h2 className="profile-text">Ibelachi Chinedu</h2>
-        <h2 className="nav-profile-icon"><FaChevronRight/></h2>
-       
+      <div className="navbar-profile" onClick={logout}>
+        <div className="image">
+          <img src={tracker} alt="profile-cover" />
+        </div>
+        <h2 className="profile-text">Mark Chinedu</h2>
+        <h2 className="nav-profile-icon">
+          <FaChevronRight />
+        </h2>
       </div>
     </div>
   );

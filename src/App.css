@@ -19,15 +19,17 @@ html{
   color: var(--primary-color);
   line-height: 1.4em;
   font-weight: 300;
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: "Roboto", sans-serif;
 }
 
 .container{
+  position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  overflow: hidden;
 }

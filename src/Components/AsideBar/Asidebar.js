@@ -10,6 +10,11 @@ import { GiTrumpet } from "react-icons/gi";
 import { BsThreeDots } from "react-icons/bs";
 import { FiPlusSquare } from "react-icons/fi";
 import FavArtistCard from "./FavArtistCard";
+import image1 from "../Assets/Cocuk.png";
+import image2 from "../Assets/Kemal.png";
+import image3 from "../Assets/Murat.png";
+import image4 from "../Assets/Umut.png";
+import track from "../Assets/playlist.png"
 
 const Asidebar = () => {
   return (
@@ -27,32 +32,38 @@ const Asidebar = () => {
 
       <div>
         <FavArtistCard
+          image={image1}
           Text={"Taylor Swift"}
           Sub={"196 songs in the library"}
           icon={<BsThreeDots />}
         />
         <FavArtistCard
+          image={image4}
           Text={"6Lack"}
           Sub={"125 songs in the library"}
           icon={<BsThreeDots />}
         />
         <FavArtistCard
+          image={image3}
           Text={"Kanye West"}
           Sub={"50 songs in the library"}
           icon={<BsThreeDots />}
         />
         <FavArtistCard
+        image={image2}
           Text={"Drake"}
           Sub={"25 songs in the library"}
           icon={<BsThreeDots />}
         />
       </div>
       <div className="bottom-container">
-        <div className="image-container"></div>
+        <div className="image-container">
+          <img src={track} alt="" />
+        </div>
         <div className="bottom-text-container">
           <div>
-          <h2 className="aside-lead-text">Torisetsu </h2>
-          <h2 className="aside-sub-text">Kana Nishino</h2>
+            <h2 className="aside-lead-text">Torisetsu </h2>
+            <h2 className="aside-sub-text">Kana Nishino</h2>
           </div>
           <button className="aside-button">
             <FiPlusSquare />

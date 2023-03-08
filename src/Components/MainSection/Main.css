@@ -1,39 +1,71 @@
 .main-container {
   width: 60%;
   height: 100vh;
-  border: 1px solid blue;
   padding: 0 1rem;
 }
 
 ul,
-li{
-    list-style-type: none;
-    margin: 0;
+li {
+  list-style-type: none;
+  margin: 0;
 }
 
-.search-bar {
+/* Searchbar- section */
+.search-container {
   display: flex;
   align-items: center;
-  margin: 2rem 0;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 1.5rem 0;
 }
 
-.inputField {
-  width: 400px;
-  padding: 10px 34px;
-  border-radius: 2.5rem;
-  border: none;
+.search-icons {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 
-input:focus {
+.search-icons .right-arrow,
+.search-icons .left-arrow {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.input-address {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  background-color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+}
+
+.input-address:hover,
+.input-address:focus {
   outline: none;
+  border: none;
+  background-color: var(--white-color);
 }
 
-input::placeholder {
+.input-address .inputField {
+  border: 0;
+  outline: none;
+  color: #3d3b3b;
+  width: 100%;
+}
+
+.input-address .search-button{
+  font-size: 2rem;
+}
+
+.input-address .inputField::placeholder {
+  font-size: 1.5rem;
   color: gray;
-  font-size: inherit;
-  font-family: inherit;
 }
-
 /* Trending Section */
 .trending .trending-text {
   font-size: 1.5rem;
@@ -74,11 +106,13 @@ input::placeholder {
 
 /* Photography Section */
 .photography-container {
-  height: 130px;
+  height: 120px;
   width: 100%;
   border-radius: 1rem;
   padding: 2rem;
-  border: 1px solid red;
+  background: url(../Assets/playlist.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .photography-container .photography-artist {
@@ -168,9 +202,19 @@ section .wordings {
 }
 
 /* Playlist Section */
-
 .my-playlist {
   margin: 2rem 0;
+  width: 100%;
+}
+
+.main-scrollbar {
+  width: inherit;
+  height: 115px;
+  overflow-y: auto;
+}
+
+.main-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 .my-playlist .playlist-text {
@@ -182,14 +226,30 @@ section .wordings {
   grid-template-columns: repeat(5, 1fr);
   font-size: 1.5rem;
   font-weight: 300;
-  padding: 1rem 0; 
+  padding: 1rem 1.7rem;
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
+  text-overflow: ellipsis;
   transition: all 0.3s ease-in-out;
 }
 
-.playlist-container:not(:first-child):hover {
-  padding: 1rem; 
+.playlist-container:hover {
+  padding: 1rem 1.7rem;
   background-color: var(--white-color);
-  transform: scale(1.05, 1.07);
+  transform: scale(1.03, 1.07);
+}
+
+.titlecard-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  font-size: 1.5rem;
+  font-weight: 300;
+  padding: 1rem 1.7rem;
+}
+
+/* play-station */
+.play-station {
+  height: 90px;
+  width: 100%;
+  border: 1px solid red;
 }

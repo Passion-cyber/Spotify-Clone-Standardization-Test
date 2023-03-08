@@ -1,13 +1,12 @@
 .asidebar-container {
   width: 20%;
   height: 100vh;
-  border: 1px solid red;
   padding: 0 1rem;
 }
 
 .aside-header {
   font-size: 2rem;
-  margin: 2rem 0;
+  margin: 2.5rem 0;
 }
 
 .shortcut-section {
@@ -19,7 +18,6 @@
 .shortcut-cards {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   font-size: 1rem;
   gap: 0.2rem;
   padding: 1rem 1.3rem;
@@ -29,19 +27,25 @@
 }
 
 .fav-artist-container {
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-    gap: .2rem;
-    margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: 5px;
 }
 
 .fav-artist-container .image {
   width: 40px;
   height: 40px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   border-radius: 50%;
   margin-right: 1rem;
+}
+
+.fav-artist-container .image img {
+  display: block;
+  height: 100%;
+  width: fit-content;
+  border-radius: 50%;
 }
 
 .fav-artist-container .fav-artist-text .lead-text {
@@ -54,43 +58,47 @@
   font-weight: 300;
 }
 
-.fav-artist-container .fav-artist-icon{
-   /* justify-content: flex-end;
+.fav-artist-container .fav-artist-icon {
+  /* justify-content: flex-end;
    align-items: flex-end; */
-   margin-left: 7rem;
+  margin-left: 7rem;
 }
 
-
-.bottom-container{
-    background-color: var(--white-color);
-    border-radius: 1rem;
-    padding: 1rem;
+.bottom-container {
+  background-color: var(--white-color);
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
-.image-container{
-    height: 95px;
-    width: 100%;
-    border: 1px solid green;
-    border-radius: 1rem;
+.image-container {
+  height: 95px;
+  width: 100%;
+  border-radius: 1rem;
 }
 
-.bottom-text-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1rem 0;
+.image-container img{
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 1rem;
+}
+.bottom-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
 }
 
-.aside-lead-text{
-    margin-bottom: 4px;
+.aside-lead-text {
+  margin-bottom: 4px;
 }
 
-.aside-sub-text{
-    font-weight: 300;
+.aside-sub-text {
+  font-weight: 300;
 }
 
-.aside-button{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
+.aside-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

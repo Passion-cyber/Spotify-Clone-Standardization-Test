@@ -4,10 +4,10 @@ import Navbar from '../Navbar/Navbar'
 import Main from '../MainSection/Main'
 
 
-const Overview = () => {
+const Overview = ({setToken}) => {
   return (
     <div className='container'>
-      <Navbar/> 
+      <Navbar setToken={setToken}/> 
       <Main/>
       <Asidebar/>
     </div>
