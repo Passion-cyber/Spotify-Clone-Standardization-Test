@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavbarCards from "./NavbarCards";
 import Navbarlogo from "./Navbarlogo";
 import { AiFillHome, AiOutlineCompass } from "react-icons/ai";
@@ -11,12 +11,34 @@ import { GrTextAlignRight } from "react-icons/gr";
 import { FaChevronRight } from "react-icons/fa";
 import tracker from "../Assets/chydel-bro.JPG";
 import "./Navbar.css";
+import axios from "axios";
 
 const Navbar = ({ setToken }) => {
+  const spotifyTKN = window.localStorage.getItem("spotifyTKN");
+  const [data, setData] = useState(null);
   const logout = () => {
     setToken(null);
     window.localStorage.removeItem("spotifyTKN");
   };
+
+  useEffect(() => {
+    let mounted = true;
+    const fetchUser = async () => {
+      const res = await axios.get("https://api.spotify.com/v1/me", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + spotifyTKN, //the token is a variable which holds the token
+        },
+      });
+      const data = res.data;
+      setData(data)
+  
+    };
+    if (mounted) fetchUser();
+    return () => (mounted = false);
+  }, []);
+
+
   return (
     <div className="navbar-container">
       <div className="navigation">
@@ -43,9 +65,9 @@ const Navbar = ({ setToken }) => {
 
       <div className="navbar-profile" onClick={logout}>
         <div className="image">
-          <img src={tracker} alt="profile-cover" />
+          <img src={data?.images[0].url} alt="profile-cover" />
         </div>
-        <h2 className="profile-text">Mark Chinedu</h2>
+        <h2 className="profile-text">{data?.display_name}</h2>
         <h2 className="nav-profile-icon">
           <FaChevronRight />
         </h2>
