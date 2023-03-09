@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <a
-        href={`${REACT_APP_AUTH_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL}&response_type=${REACT_APP_RESPONSE_TYPE}`}
+        href={`${REACT_APP_AUTH_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&scope=user-top-read&redirect_uri=${REACT_APP_REDIRECT_URL}&response_type=${REACT_APP_RESPONSE_TYPE}`}
       >
         <button className="authentication-btn">AUthenticate</button>
       </a>

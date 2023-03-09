@@ -62,6 +62,7 @@
 }
 
 .navbar-profile {
+  width: 100%;
   border-top: 2px solid rgb(213, 205, 205);
   padding: 1rem 10px;
   display: flex;

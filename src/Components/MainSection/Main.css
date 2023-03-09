@@ -58,7 +58,7 @@ li {
   width: 100%;
 }
 
-.input-address .search-button{
+.input-address .search-button {
   font-size: 2rem;
 }
 
@@ -110,8 +110,14 @@ li {
   width: 100%;
   border-radius: 1rem;
   padding: 2rem;
-  background: url(../Assets/playlist.png);
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(../Assets/bgimage.jpeg);
   background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
 }
 
@@ -252,4 +258,73 @@ section .wordings {
   height: 90px;
   width: 100%;
   border: 1px solid red;
+}
+
+.music-player-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.play-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.play-buttons > * {
+  background-color: transparent;
+  border: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.play-buttons .play-btn,
+.play-buttons .pause-btn {
+  font-size: 4rem;
+}
+
+.leftplay-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  cursor: pointer;
+}
+
+.leftplay-buttons > * {
+  font-size: 2rem;
+}
+
+/* Radio Buttons */
+.radio-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+.radio-buttons .input-range {
+  width: 500px;
+  border: 1px solid red;
+}
+
+.radio-buttons .input-range input{
+  width: 100%;
+  background-color: gray;
+  color: var(--primary-color);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.radio-buttons p{
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+/*  */
+.leftplay-buttons input{
+  width: 30px;
 }

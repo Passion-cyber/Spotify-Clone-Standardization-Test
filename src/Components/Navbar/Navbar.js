@@ -9,7 +9,6 @@ import { HiOutlineCalendar } from "react-icons/hi";
 import { BsFillPeopleFill, BsStar } from "react-icons/bs";
 import { GrTextAlignRight } from "react-icons/gr";
 import { FaChevronRight } from "react-icons/fa";
-import tracker from "../Assets/chydel-bro.JPG";
 import "./Navbar.css";
 import axios from "axios";
 
@@ -24,20 +23,17 @@ const Navbar = ({ setToken }) => {
   useEffect(() => {
     let mounted = true;
     const fetchUser = async () => {
-      const res = await axios.get("https://api.spotify.com/v1/me", {
+      const { data } = await axios.get("https://api.spotify.com/v1/me", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + spotifyTKN, //the token is a variable which holds the token
+          Authorization: "Bearer " + spotifyTKN,
         },
       });
-      const data = res.data;
-      setData(data)
-  
+      setData(data);
     };
     if (mounted) fetchUser();
     return () => (mounted = false);
   }, []);
-
 
   return (
     <div className="navbar-container">
@@ -65,7 +61,12 @@ const Navbar = ({ setToken }) => {
 
       <div className="navbar-profile" onClick={logout}>
         <div className="image">
-          <img src={data?.images[0].url} alt="profile-cover" />
+          <img
+            src={
+              "https://i.scdn.co/image/ab6775700000ee8554123d23b994c6c3dc87d924"
+            }
+            alt="profile-cover"
+          />
         </div>
         <h2 className="profile-text">{data?.display_name}</h2>
         <h2 className="nav-profile-icon">
