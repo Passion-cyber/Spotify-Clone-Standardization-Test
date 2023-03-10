@@ -126,7 +126,7 @@
   width: 100px;
   height: 50px;
   transition: all 0.3s ease-in-out;
-  scale: 0;
+  
 }
 
 .modal-container.modal-open {

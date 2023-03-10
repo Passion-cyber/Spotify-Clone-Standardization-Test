@@ -11,12 +11,15 @@ li {
 }
 
 /* Searchbar- section */
+
 .search-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
   margin: 1.5rem 0;
+  border: 1px solid red;
+  position: relative;
 }
 
 .search-icons {
@@ -102,6 +105,26 @@ li {
 
 .icon-section span {
   font-size: 1.5rem;
+}
+/* searchDropdown  */
+.searchDropdown {
+  position: absolute;
+  height: 200px;
+  right: 0;
+  width: 100%;
+  max-width: 300px;
+  top: -700vh;
+  background-color: white;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.searchDropdown.open {
+  top: calc(100% + 0.85rem);
 }
 
 /* Photography Section */

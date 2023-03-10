@@ -24,12 +24,13 @@ import {
 } from "react-icons/tb";
 import { FaMusic } from "react-icons/fa";
 import Inputrange from "./Inputrange";
+import SearchResultCard from "./SearchResultCard";
 
 const Main = ({ setToken }) => {
   const [searchartist, setSearchArtist] = useState("");
   const [data, setData] = useState(null);
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
-
+  // load playlist
   useEffect(() => {
     let mounted = true;
     const fetchUser = async () => {
@@ -40,12 +41,11 @@ const Main = ({ setToken }) => {
             Authorization: "Bearer " + spotifyTKN,
           },
           params: {
-            q: "common person",
+            q: searchartist,
             type: "track",
           },
         });
 
-        console.log(data);
         setData(data);
       } catch (error) {
         console.log(error);
@@ -53,10 +53,11 @@ const Main = ({ setToken }) => {
     };
     if (mounted) fetchUser();
     return () => (mounted = false);
-  }, []);
+  }, [searchartist]);
 
   return (
     <main className="main-container">
+      {/* search box  */}
       <section className="search-bar">
         <div className="search-container">
           <div className="search-icons">
@@ -78,6 +79,13 @@ const Main = ({ setToken }) => {
               placeholder="Search for artists, songs and ..."
               onChange={(e) => setSearchArtist(e.target.value)}
             />
+          </div>
+          <div
+            className={`searchDropdown ${searchartist.length >= 1 && "open"}`}
+          >
+            {data?.tracks?.items.map((el, i) => (
+              <SearchResultCard key={i} el={el} />
+            ))}
           </div>
         </div>
       </section>
