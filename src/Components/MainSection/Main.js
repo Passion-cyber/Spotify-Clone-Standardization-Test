@@ -10,7 +10,7 @@ import {
   BsVolumeDownFill,
   BsFillVolumeUpFill,
   BsShuffle,
-  BsRepeat
+  BsRepeat,
 } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import { AiOutlineRight } from "react-icons/ai";
@@ -23,6 +23,7 @@ import {
   TbPlayerTrackNextFilled,
 } from "react-icons/tb";
 import { FaMusic } from "react-icons/fa";
+import Inputrange from "./Inputrange";
 
 const Main = ({ setToken }) => {
   const [searchartist, setSearchArtist] = useState("");
@@ -82,9 +83,7 @@ const Main = ({ setToken }) => {
       </section>
 
       <section className="trending">
-        <h2 className="trending-text">
-          What's hot 🔥
-        </h2>
+        <h2 className="trending-text">What's hot 🔥</h2>
         <div className="trending-zone">
           <h2 className="trending-header">Trending</h2>
           <div className="icon-section">
@@ -172,68 +171,65 @@ const Player = () => {
   };
   return (
     <section className="player-container">
-    <section className="music-player-buttons">
-      <div className="leftplay-buttons">
-        <i className="music-btn">
-          {" "}
-          <FaMusic />{" "}
-        </i>
-        <i className="heart-btn">
-          {" "}
-          <BsBalloonHeart />
-        </i>
-        <i className="expand-btn">
-          {" "}
-          <BsArrowsAngleExpand />
-        </i>
-      </div>
-      <div className="play-buttons">
-      <i><BsRepeat/></i>
-        <button className="prev-btn">
-          <TbPlayerTrackPrevFilled />
-        </button>
-        {playing ? (
-          <button className="pause-btn" onClick={pause}>
-            <BsFillPauseCircleFill />
+      <section className="music-player-buttons">
+        <div className="leftplay-buttons">
+          <i className="music-btn">
+            {" "}
+            <FaMusic />{" "}
+          </i>
+          <i className="heart-btn">
+            {" "}
+            <BsBalloonHeart />
+          </i>
+          <i className="expand-btn">
+            {" "}
+            <BsArrowsAngleExpand />
+          </i>
+        </div>
+        <div className="play-buttons">
+          <i>
+            <BsRepeat />
+          </i>
+          <button className="prev-btn">
+            <TbPlayerTrackPrevFilled />
           </button>
-        ) : (
-          <button className="play-btn" onClick={play}>
-            <BsFillPlayCircleFill />
+          {playing ? (
+            <button className="pause-btn" onClick={pause}>
+              <BsFillPauseCircleFill />
+            </button>
+          ) : (
+            <button className="play-btn" onClick={play}>
+              <BsFillPlayCircleFill />
+            </button>
+          )}
+          <button className="next-btn">
+            <TbPlayerTrackNextFilled />
           </button>
-        )}
-        <button className="next-btn">
-          <TbPlayerTrackNextFilled />
-        </button>
-      <i><BsShuffle/></i>
-
-      </div>
-      <div className="rightplay-buttons">
-      <div className="center-buttons">
-        <i className="music-btn">
-        <BsVolumeDownFill/>
-        </i>
-        <i className="heart-btn">
-        <input type="range" />
-        </i>
-        <i className="expand-btn">
-        <BsFillVolumeUpFill/>
-        </i>
-      </div>
-      </div>
-    </section>
-    <section className="radio-buttons">
-      <div>
-        <p className="start-time-stamps">0:43</p>
-      </div>
-      <div className="input-range">
-        <input type="range" />
-      </div>
-      <div>
-        <p className="stop-time-stamp">2:59</p>
-      </div>
-      
-
-    </section>
+          <i>
+            <BsShuffle />
+          </i>
+        </div>
+        <div className="rightplay-buttons">
+          <div className="center-buttons">
+            <div className="music-btn">
+              <BsVolumeDownFill />
+            </div>
+            <Inputrange style={{ width: "30px" }} />
+            <div className="expand-btn">
+              <BsFillVolumeUpFill />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="radio-buttons">
+        <div>
+          <p className="start-time-stamps">0:43</p>
+        </div>
+        <Inputrange />
+        <div>
+          <p className="stop-time-stamp">2:59</p>
+        </div>
+      </section>
     </section>
   );
 };

@@ -131,7 +131,6 @@
 
 .modal-container.modal-open {
   right: -5px;
-  scale: 1;
 }
 .logout-btn {
   display: flex;
