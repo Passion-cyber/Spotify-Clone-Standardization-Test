@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Login from "./Components/Authentication/Login";
-import Overview from "./Components/Pages/Overview";
+import Overview from "./Pages/Overview";
 
 function App() {
   const [token, setToken] = useState();

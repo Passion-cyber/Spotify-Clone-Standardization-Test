@@ -1,10 +1,14 @@
+import { useState } from "react"
+
 const SearchArtist = () => {
-        return artists.map(artist => (
-            <div key={artist.id}>
-                {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
-                {artist.name}
+    const [tracks, setTracks] = useState({})
+
+        return (
+            <div key={items.id}>
+                {item.preview_url.length ? <p className="playlist-link">{items.preview_url}</p> : <p>Invalid Url Link</p>}
+    
             </div>
-        ))
+        )
     }
 
 export default SearchArtist

@@ -16,7 +16,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { AiOutlineRight } from "react-icons/ai";
 import PlaylistCards from "./PlaylistCards";
 import PlaylistTitleCard from "./PlaylistTitleCard";
-import "./Main.css";
+import "../../Stylsheets/Main.css";
 import axios from "axios";
 import {
   TbPlayerTrackPrevFilled,
@@ -39,13 +39,13 @@ const Main = ({ setToken }) => {
             Authorization: "Bearer " + spotifyTKN,
           },
           params: {
-            q: "fountain",
+            q: "common person",
             type: "track",
           },
         });
 
-        setData(data);
         console.log(data);
+        setData(data);
       } catch (error) {
         console.log(error);
       }
@@ -208,7 +208,7 @@ const Player = () => {
 
       </div>
       <div className="rightplay-buttons">
-      <div className="leftplay-buttons">
+      <div className="center-buttons">
         <i className="music-btn">
         <BsVolumeDownFill/>
         </i>

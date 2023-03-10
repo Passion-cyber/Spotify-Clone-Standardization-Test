@@ -1,0 +1,30 @@
+.login-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--spotify-color);
+}
+
+.login-container .authentication-btn {
+  padding: 2.5rem 7rem;
+  font-size: 3rem;
+  font-weight: bold;
+  border-radius: 5rem;
+  border: 1px solid var(--spotify-color);
+  color: var(--spotify-color);
+  background-color: var(--black-color);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-container .authentication-btn:hover {
+  border: 1px solid var(--primary-color);
+  color: var(--black-color);
+  background-color: var(--spotify-color);
+}

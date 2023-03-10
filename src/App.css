@@ -1,19 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-:root{
-  --primary-color: #15111E;
-  --secondary-color: #E7E8F3;
+:root {
+  --primary-color: #15111e;
+  --secondary-color: #f4f5fe;
   --white-color: #fff;
+  --black-color: rgba(0, 0, 0, 0.78);
+  --spotify-color: #1db954;
+  --background-color: #0f0f0f;
 }
 
 body,
-html{
+html {
   font-size: 7px;
   background-color: var(--secondary-color);
   color: var(--primary-color);
@@ -21,13 +24,14 @@ html{
   font-weight: 300;
   overflow: hidden;
   font-family: "Roboto", sans-serif;
-}
-
-.container{
-  position: relative;
   width: 100vw;
   height: 100vh;
-  display: flex;
+  
+}
+
+.container {
+  position: relative;
+   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;

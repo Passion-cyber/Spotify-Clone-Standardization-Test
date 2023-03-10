@@ -1,5 +1,5 @@
 import React from "react";
-import "./Asidebar.css";
+import "../../Stylsheets/Asidebar.css";
 import ShortcutCards from "./ShortcutCards";
 import { MdOutlineSevereCold } from "react-icons/md";
 import { AiTwotoneStar } from "react-icons/ai";
@@ -10,11 +10,11 @@ import { GiTrumpet } from "react-icons/gi";
 import { BsThreeDots } from "react-icons/bs";
 import { FiPlusSquare } from "react-icons/fi";
 import FavArtistCard from "./FavArtistCard";
-import image1 from "../Assets/Cocuk.png";
-import image2 from "../Assets/Kemal.png";
-import image3 from "../Assets/Murat.png";
-import image4 from "../Assets/Umut.png";
-import track from "../Assets/playlist.png"
+import image1 from "../../Assets/images/Cocuk.png";
+import image2 from "../../Assets/images/Kemal.png";
+import image3 from "../../Assets/images/Murat.png";
+import image4 from "../../Assets/images/Umut.png";
+import track from "../../Assets/images/playlist.png"
 
 const Asidebar = () => {
   return (

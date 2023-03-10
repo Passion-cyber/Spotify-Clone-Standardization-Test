@@ -115,7 +115,7 @@ li {
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url(../Assets/bgimage.jpeg);
+    url("../../Assets/images/bgimage.jpeg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -194,6 +194,7 @@ section .wordings {
 
 .monthly-listners {
   text-align: right;
+  color: var(--secondary-color);
 }
 
 .monthly-listners .monthly {
@@ -257,7 +258,10 @@ section .wordings {
 .play-station {
   height: 90px;
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid var(white);
+  background-color: var(--white-color);
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 .music-player-buttons {
@@ -282,6 +286,9 @@ section .wordings {
   cursor: pointer;
 }
 
+.play-buttons i {
+  font-size: 2rem;
+}
 .play-buttons .play-btn,
 .play-buttons .pause-btn {
   font-size: 4rem;
@@ -296,6 +303,9 @@ section .wordings {
 
 .leftplay-buttons > * {
   font-size: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgb(230, 225, 225);
 }
 
 /* Radio Buttons */
@@ -309,22 +319,33 @@ section .wordings {
 
 .radio-buttons .input-range {
   width: 500px;
-  border: 1px solid red;
 }
 
-.radio-buttons .input-range input{
+.input-range input[type="range"] {
   width: 100%;
-  background-color: gray;
+  height: 2px;
+  background-color: #000;
+  border: 1px solid #000;
   color: var(--primary-color);
+  border-radius: 3rem;
   border-radius: 1rem;
   cursor: pointer;
 }
 
-.radio-buttons p{
+.radio-buttons p {
   font-size: 1.5rem;
   font-weight: 500;
 }
 /*  */
-.leftplay-buttons input{
+.center-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.center-buttons input {
   width: 30px;
+}
+
+.center-buttons > * {
+  font-size: 2rem;
 }
