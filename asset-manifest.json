@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Spotify-Clone-Standardization-Test/static/css/main.6c77ce0f.css",
+    "main.js": "/Spotify-Clone-Standardization-Test/static/js/main.d08d00bf.js",
+    "static/js/787.8f29a1ac.chunk.js": "/Spotify-Clone-Standardization-Test/static/js/787.8f29a1ac.chunk.js",
+    "static/media/Cocuk.png": "/Spotify-Clone-Standardization-Test/static/media/Cocuk.8ed91c049062752a9327.png",
+    "static/media/Murat.png": "/Spotify-Clone-Standardization-Test/static/media/Murat.4a70a0232ef9aee0152c.png",
+    "static/media/Kemal.png": "/Spotify-Clone-Standardization-Test/static/media/Kemal.9a411bcebbc67bc03801.png",
+    "static/media/Umut.png": "/Spotify-Clone-Standardization-Test/static/media/Umut.9aeb42464b4def9ec07a.png",
+    "static/media/playlist.png": "/Spotify-Clone-Standardization-Test/static/media/playlist.e10f1411889a77f9d1a2.png",
+    "static/media/bgimage.jpeg": "/Spotify-Clone-Standardization-Test/static/media/bgimage.7c4ad5716d5c4c653c8c.jpeg",
+    "static/media/spotify-logo.png": "/Spotify-Clone-Standardization-Test/static/media/spotify-logo.162773c3b3a3bb6ae44d.png",
+    "index.html": "/Spotify-Clone-Standardization-Test/index.html",
+    "main.6c77ce0f.css.map": "/Spotify-Clone-Standardization-Test/static/css/main.6c77ce0f.css.map",
+    "main.d08d00bf.js.map": "/Spotify-Clone-Standardization-Test/static/js/main.d08d00bf.js.map",
+    "787.8f29a1ac.chunk.js.map": "/Spotify-Clone-Standardization-Test/static/js/787.8f29a1ac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6c77ce0f.css",
+    "static/js/main.d08d00bf.js"
+  ]
+}
