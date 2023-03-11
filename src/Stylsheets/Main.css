@@ -11,14 +11,12 @@ li {
 }
 
 /* Searchbar- section */
-
 .search-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
   margin: 1.5rem 0;
-  border: 1px solid red;
   position: relative;
 }
 

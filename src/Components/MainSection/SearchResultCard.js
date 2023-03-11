@@ -1,10 +1,9 @@
-
 import "../../Stylsheets/SearchResultCard.css";
 
-const SearchResultCard = ({ el }) => {
+const SearchResultCard = ({ el, closeSearchModal }) => {
   console.log(el);
   return (
-    <div className="result-cards">
+    <div className="result-cards" onClick={closeSearchModal}>
       <div className="result-card-image">
         <img src={el?.album?.images[0]?.url} alt="resuit-search-image" />
       </div>
@@ -31,7 +30,7 @@ const SearchResultCard = ({ el }) => {
 
 export default SearchResultCard;
 
-const converterToSeconds = (msValue) => {
+export const converterToSeconds = (msValue) => {
   var minutes = Math.floor(msValue / 60000);
   var seconds = ((msValue % 60000) / 1000).toFixed(0);
   return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;

@@ -24,13 +24,16 @@ import {
 } from "react-icons/tb";
 import { FaMusic } from "react-icons/fa";
 import Inputrange from "./Inputrange";
-import SearchResultCard from "./SearchResultCard";
+import SearchResultCard, { converterToSeconds } from "./SearchResultCard";
 
 const Main = ({ setToken }) => {
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [searchartist, setSearchArtist] = useState("");
   const [data, setData] = useState(null);
+  const [songs, setSongs] = useState([]);
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
-  // load playlist
+
+  // loading playlist
   useEffect(() => {
     let mounted = true;
     const fetchUser = async () => {
@@ -41,12 +44,13 @@ const Main = ({ setToken }) => {
             Authorization: "Bearer " + spotifyTKN,
           },
           params: {
-            q: searchartist,
+            q: searchartist.length < 1 ? "6Lack" : searchartist,
             type: "track",
           },
         });
 
         setData(data);
+        setSongs(data);
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +58,16 @@ const Main = ({ setToken }) => {
     if (mounted) fetchUser();
     return () => (mounted = false);
   }, [searchartist]);
+  // Closing the drop down menu on clicking a particular song
+  const closeDropDownMenu = () => {
+    setIsDropDownOpen(!isDropDownOpen);
+  };
 
+  // Closing the drop down menu when the input is not on focus
+  const handleBlur = () => {
+    const blurryEl = document.querySelector(".searchDropdown");
+    blurryEl.classList.toggle("open");
+  };
   return (
     <main className="main-container">
       {/* search box  */}
@@ -77,14 +90,24 @@ const Main = ({ setToken }) => {
               type="text"
               className="inputField"
               placeholder="Search for artists, songs and ..."
-              onChange={(e) => setSearchArtist(e.target.value)}
+              onBlur={handleBlur}
+              onChange={(e) => {
+                setSearchArtist(e.target.value);
+                setIsDropDownOpen(false);
+              }}
             />
           </div>
           <div
-            className={`searchDropdown ${searchartist.length >= 1 && "open"}`}
+            className={`searchDropdown ${
+              searchartist.length >= 1 && !isDropDownOpen && "open"
+            }`}
           >
             {data?.tracks?.items.map((el, i) => (
-              <SearchResultCard key={i} el={el} />
+              <SearchResultCard
+                key={i}
+                el={el}
+                closeSearchModal={closeDropDownMenu}
+              />
             ))}
           </div>
         </div>
@@ -141,22 +164,20 @@ const Main = ({ setToken }) => {
         />
 
         <section className="main-scrollbar">
-          {Array(9)
-            .fill(0)
-            .map((_, i) => (
-              <PlaylistCards
-                number={i + 1}
-                title={"Addict"}
-                artist={"Kizz Daniel"}
-                time={"03:24"}
-                album={"Barnabas"}
-                key={i}
-              />
-            ))}
+          {songs?.tracks?.items.map((_, i) => (
+            <PlaylistCards
+              number={i + 1}
+              title={_?.name.substring(0, 15) + "..."}
+              artist={_?.artists[0]?.name}
+              time={converterToSeconds(_?.duration_ms)}
+              album={_?.album?.name}
+              key={i}
+            />
+          ))}
         </section>
       </section>
       <section className="play-station">
-        <Player />
+        <Player songs={songs?.tracks?.items ?? []} />
       </section>
     </main>
   );
@@ -164,10 +185,11 @@ const Main = ({ setToken }) => {
 
 export default Main;
 
-const Player = () => {
+const Player = ({ songs }) => {
   const [playing, setPlaying] = useState(false);
+  const [count, setCount] = useState(1);
   const audio = Audio({
-    file: "https://p.scdn.co/mp3-preview/8d1fa7a10f67ff020e5099271d8a80d47e00b4dc?cid=d7208688b03147aebe8d5aeae751497f",
+    file: songs[count - 1]?.preview_url,
   });
   const play = () => {
     audio.play();
@@ -177,6 +199,7 @@ const Player = () => {
     audio.pause();
     setPlaying(playing);
   };
+
   return (
     <section className="player-container">
       <section className="music-player-buttons">

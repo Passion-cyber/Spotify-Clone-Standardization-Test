@@ -36,3 +36,16 @@ html {
   gap: 2rem;
   overflow: hidden;
 }
+
+/* .color-backdrop.playing {
+  animation: colorChange 20s alternate infinite;
+}
+
+@keyframes colorChange {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+} */
