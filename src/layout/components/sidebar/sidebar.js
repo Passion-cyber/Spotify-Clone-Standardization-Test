@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
-import NavbarCards from "./NavbarCards";
-import Navbarlogo from "./Navbarlogo";
-import { AiFillHome, AiOutlineCompass } from "react-icons/ai";
-import { BiLogOut } from "react-icons/bi";
-import { GiChart, GiSelfLove } from "react-icons/gi";
-import { MdOutlineNewspaper, MdOutlineEventNote } from "react-icons/md";
-import { HiOutlineCalendar } from "react-icons/hi";
-import { BsFillPeopleFill, BsStar } from "react-icons/bs";
-import { GrTextAlignRight } from "react-icons/gr";
-import { FaChevronRight, FaReact } from "react-icons/fa";
-import "../../Stylsheets/Navbar.css";
+import NavbarCards from "./sidebarcard";
+import Navbarlogo from "./sidebarnavlogo";
 import axios from "axios";
+import "../../../Stylsheets/sidebar.css";
+import { Nav_Items } from "../../../Ultilities";
+import { GrTextAlignRight } from "react-icons/gr";
+import { FaChevronRight } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { Navigate, redirect, Router, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const Navbar = ({ setToken }) => {
+const SideNavbar = ({ setToken }) => {
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
   const [data, setData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
   const logout = () => {
     setToken(null);
     window.localStorage.removeItem("spotifyTKN");
+    navigate("/");
   };
-
+  // order of useEffect matter
   useEffect(() => {
     let mounted = true;
     const fetchUser = async () => {
@@ -32,11 +31,26 @@ const Navbar = ({ setToken }) => {
         },
       });
       setData(data);
+      console.log(data);
     };
     if (mounted) fetchUser();
     return () => (mounted = false);
   }, []);
+  // revalidating token
+  useEffect(() => {
+    // define the callback
+    const handleLogout = () => {
+      logout();
+      toast.error("Token Expired, please authenticate");
+    };
 
+    // set interval to logout every hour (in milliseconds)
+    const interval = setInterval(() => {
+      handleLogout();
+    }, 3600000);
+    // cleanup function to clear interval when component unmounts
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="navbar-container">
       <div className="navigation">
@@ -44,27 +58,23 @@ const Navbar = ({ setToken }) => {
           <GrTextAlignRight />
         </i>
       </div>
-      <Navbarlogo title={"Passion"} text={"Cyber"} icon={<FaReact />} />
-      <NavbarCards title={"Home"} icon={<AiFillHome />} />
-      <NavbarCards title={"Trends"} icon={<GiChart />} />
-      <NavbarCards title={"Feed"} icon={<AiOutlineCompass />} />
-      <h3 className="navbar-text">Discover</h3>
-      <NavbarCards title={"News"} icon={<MdOutlineNewspaper />} />
-      <NavbarCards title={"Release Calendar"} icon={<HiOutlineCalendar />} />
-      <NavbarCards title={"Events"} icon={<MdOutlineEventNote />} />
-      <h3 className="navbar-text">Your collection</h3>
-      <NavbarCards title={"Favorite Songs"} icon={<GiSelfLove />} />
-      <NavbarCards title={"Artist"} icon={<BsFillPeopleFill />} />
-      <NavbarCards title={"Album"} icon={<BsStar />} />
+      <div className="nav-wrap">
+        {Nav_Items?.map(({ heading, text, title, Icon }, i) =>
+          heading ? (
+            <h3 className="navbar-text" key={i}>
+              {heading}
+            </h3>
+          ) : text ? (
+            <Navbarlogo title={title} text={text} key={i} icon={<Icon />} />
+          ) : (
+            <NavbarCards title={title} icon={<Icon />} key={i} />
+          )
+        )}
+      </div>
 
       <div className="navbar-profile" onClick={() => setIsOpen(!isOpen)}>
         <div className="image">
-          <img
-            src={
-              "https://i.scdn.co/image/ab6775700000ee8554123d23b994c6c3dc87d924"
-            }
-            alt="profile-cover"
-          />
+          <img src={data?.images?.[0]?.url} alt="profile-cover" />
         </div>
         <h2 className="profile-text">{data?.display_name}</h2>
         <h2 className="nav-profile-icon">
@@ -76,7 +86,7 @@ const Navbar = ({ setToken }) => {
   );
 };
 
-export default Navbar;
+export default SideNavbar;
 
 const Modal = ({ isOpen, setIsOpen, action }) => {
   const handleLogout = () => {

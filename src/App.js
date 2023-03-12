@@ -1,30 +1,34 @@
-import { useState, useEffect } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./App.css";
 import Login from "./Components/Authentication/Login";
-import Overview from "./Pages/Overview";
+import AppLayout from "./layout";
 
 function App() {
-  const [token, setToken] = useState();
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    let spotifyTKN = window.localStorage.getItem("spotifyTKN");
-    if (!spotifyTKN && hash) {
-      spotifyTKN = hash
-        .substring(1)
-        .split("&")
-        .find((el) => el.startsWith("access_token"))
-        .split("=")[1];
-      window.location.hash = "";
-      window.localStorage.setItem("spotifyTKN", spotifyTKN);
-    }
-    setToken(spotifyTKN);
-  }, []);
-
   return (
-    <div className="container">
-      {!token ? <Login /> : <Overview setToken={setToken} />}
-    </div>
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/authenticated" element={<AppLayout />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

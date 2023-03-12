@@ -31,6 +31,7 @@ const Main = ({ setToken }) => {
   const [searchartist, setSearchArtist] = useState("");
   const [data, setData] = useState(null);
   const [songs, setSongs] = useState([]);
+  const [showSearchResult, setShowSearchResult] = useState(true);
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
 
   // loading playlist
@@ -48,9 +49,7 @@ const Main = ({ setToken }) => {
             type: "track",
           },
         });
-
         setData(data);
-        setSongs(data);
       } catch (error) {
         console.log(error);
       }
@@ -58,6 +57,30 @@ const Main = ({ setToken }) => {
     if (mounted) fetchUser();
     return () => (mounted = false);
   }, [searchartist]);
+  // loading playlist
+  useEffect(() => {
+    let mounted = true;
+    const fetchUser = async () => {
+      try {
+        const { data } = await axios("https://api.spotify.com/v1/search", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + spotifyTKN,
+          },
+          params: {
+            q: "6Lack",
+            type: "track",
+          },
+        });
+
+        setSongs(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (mounted) fetchUser();
+    return () => (mounted = false);
+  }, []);
   // Closing the drop down menu on clicking a particular song
   const closeDropDownMenu = () => {
     setIsDropDownOpen(!isDropDownOpen);
@@ -67,6 +90,7 @@ const Main = ({ setToken }) => {
   const handleBlur = () => {
     const blurryEl = document.querySelector(".searchDropdown");
     blurryEl.classList.toggle("open");
+    setSearchArtist("");
   };
   return (
     <main className="main-container">
@@ -107,6 +131,8 @@ const Main = ({ setToken }) => {
                 key={i}
                 el={el}
                 closeSearchModal={closeDropDownMenu}
+                setShowSearchResult={setShowSearchResult}
+                showSearchResult={showSearchResult}
               />
             ))}
           </div>
@@ -162,19 +188,33 @@ const Main = ({ setToken }) => {
           time={"TIME"}
           album={"ALBUM"}
         />
-
-        <section className="main-scrollbar">
-          {songs?.tracks?.items.map((_, i) => (
-            <PlaylistCards
-              number={i + 1}
-              title={_?.name.substring(0, 15) + "..."}
-              artist={_?.artists[0]?.name}
-              time={converterToSeconds(_?.duration_ms)}
-              album={_?.album?.name}
-              key={i}
-            />
-          ))}
-        </section>
+        {showSearchResult ? (
+          <section className="main-scrollbar">
+            {data?.tracks?.items.map((_, i) => (
+              <PlaylistCards
+                number={i + 1}
+                title={_?.name.substring(0, 15) + "..."}
+                artist={_?.artists[0]?.name}
+                time={converterToSeconds(_?.duration_ms)}
+                album={_?.album?.name}
+                key={i}
+              />
+            ))}
+          </section>
+        ) : (
+          <section className="main-scrollbar">
+            {songs?.tracks?.items.map((_, i) => (
+              <PlaylistCards
+                number={i + 1}
+                title={_?.name.substring(0, 15) + "..."}
+                artist={_?.artists[0]?.name}
+                time={converterToSeconds(_?.duration_ms)}
+                album={_?.album?.name}
+                key={i}
+              />
+            ))}
+          </section>
+        )}
       </section>
       <section className="play-station">
         <Player songs={songs?.tracks?.items ?? []} />

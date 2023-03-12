@@ -1,17 +1,12 @@
-import React from 'react'
-import Asidebar from '../Components/AsideBar/Asidebar'
-import Navbar from '../Components/Navbar/Navbar'
-import Main from '../Components/MainSection/Main'
+import React from "react";
+import Main from "../Components/MainSection/Main";
 
-
-const Overview = ({setToken}) => {
+const Overview = ({ setToken }) => {
   return (
-    <div className='container'>
-      <Navbar setToken={setToken}/> 
-      <Main/>
-      <Asidebar/>
+    <div className="container">
+      {/* <Main /> */}
     </div>
-  )
-}
+  );
+};
 
-export default Overview
+export default Overview;

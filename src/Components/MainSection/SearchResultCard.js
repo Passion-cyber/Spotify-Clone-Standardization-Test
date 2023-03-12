@@ -1,9 +1,17 @@
 import "../../Stylsheets/SearchResultCard.css";
 
-const SearchResultCard = ({ el, closeSearchModal }) => {
-  console.log(el);
+const SearchResultCard = ({
+  el,
+  closeSearchModal,
+  showSearchResult,
+  setShowSearchResult,
+}) => {
+  const handleClick = () => {
+    closeSearchModal();
+    setShowSearchResult(true);
+  };
   return (
-    <div className="result-cards" onClick={closeSearchModal}>
+    <div className="result-cards" onClick={handleClick}>
       <div className="result-card-image">
         <img src={el?.album?.images[0]?.url} alt="resuit-search-image" />
       </div>

@@ -2,8 +2,7 @@ import React from "react";
 import "../../Stylsheets/Login.css";
 import track from "../../Assets/images/spotify-logo.png";
 const REACT_APP_CLIENT_ID = "d7208688b03147aebe8d5aeae751497f";
-const REACT_APP_REDIRECT_URL =
-  "https://passion-cyber.github.io/Spotify-Clone-Standardization-Test/";
+const REACT_APP_REDIRECT_URL = "https://passion-cyber.github.io/Spotify-Clone-Standardization-Test/authenticated";
 const REACT_APP_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REACT_APP_RESPONSE_TYPE = "token";
 
