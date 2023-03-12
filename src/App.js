@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
+import ErrorPage from "./Components/Authentication/ErrorPage";
 import Login from "./Components/Authentication/Login";
 import AppLayout from "./layout";
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/authenticated" element={<AppLayout />} />
+          <Route path="*" element={<ErrorPage />}/>
         </Routes>
       </Router>
     </>
