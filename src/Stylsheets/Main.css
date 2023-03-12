@@ -3,6 +3,7 @@
   width: 100%;
   height: 100vh;
   padding: 0 1rem;
+  display: none;
 }
 
 ul,
@@ -240,7 +241,7 @@ section .wordings {
 .main-scrollbar {
   width: inherit;
   overflow-y: auto;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   height: calc(100vh - 430px);
 }
 
@@ -253,8 +254,8 @@ section .wordings {
 }
 
 .playlist-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-direction: column;
   font-size: 1.5rem;
   font-weight: 300;
   padding: 1rem 1.7rem;

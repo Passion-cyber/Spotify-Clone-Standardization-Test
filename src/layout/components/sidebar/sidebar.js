@@ -74,9 +74,9 @@ const SideNavbar = ({ setToken }) => {
 
       <div className="navbar-profile" onClick={() => setIsOpen(!isOpen)}>
         <div className="image">
-          <img src={data?.images?.[0]?.url} alt="profile-cover" />
+          <img src={data?.images?.[0]?.url ?? "https://i.scdn.co/image/ab6775700000ee8554123d23b994c6c3dc87d924"} alt="profile-cover" />
         </div>
-        <h2 className="profile-text">{data?.display_name}</h2>
+        <h2 className="profile-text">{data?.display_name ?? "PassionCyber"}</h2>
         <h2 className="nav-profile-icon">
           <FaChevronRight />
         </h2>
