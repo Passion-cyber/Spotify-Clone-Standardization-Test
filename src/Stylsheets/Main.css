@@ -253,8 +253,8 @@ section .wordings {
 }
 
 .playlist-container {
-  display: flex;
-  flex-direction: column;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
   font-size: 1.5rem;
   font-weight: 300;
   padding: 1rem 1.7rem;
