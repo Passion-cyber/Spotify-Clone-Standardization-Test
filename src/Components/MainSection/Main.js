@@ -1,4 +1,4 @@
-import { AudioPlaylist } from "ts-audio";
+import { Audio, AudioPlaylist } from "ts-audio";
 import React, { useEffect, useState } from "react";
 import {
   BsArrowLeft,
@@ -26,7 +26,6 @@ import Overview from "./overview";
 import SongCard from "../songCard";
 
 const Main = ({ userId }) => {
-  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [searchartist, setSearchArtist] = useState("");
   const [data, setData] = useState(null);
   const [myPlaylist, setMyPlaylist] = useState([]);
@@ -90,11 +89,6 @@ const Main = ({ userId }) => {
     return () => (mounted = false);
   }, [userId]);
 
-  // Closing the drop down menu on clicking a particular song
-  const closeDropDownMenu = () => {
-    setIsDropDownOpen(!isDropDownOpen);
-  };
-
   useEffect(() => {
     if (searchartist.length < 1) {
       setShowSearchResult(false);
@@ -127,7 +121,6 @@ const Main = ({ userId }) => {
               placeholder="Search for artists, songs and ..."
               onChange={(e) => {
                 setSearchArtist(e.target.value);
-                setIsDropDownOpen(false);
               }}
             />
           </div>
@@ -144,7 +137,7 @@ const Main = ({ userId }) => {
         <Overview songs={myPlaylist} />
       )}
       <section className="play-station">
-        <Player songs={myPlaylist ?? []} />
+        <Player songs={myPlaylist} />
       </section>
     </main>
   );
@@ -154,10 +147,12 @@ export default Main;
 
 const Player = ({ songs }) => {
   const [playing, setPlaying] = useState(false);
-  const audio = AudioPlaylist({
-    files: songs?.map((el) => el?.preview_url) ?? [],
+  
+  const audio = Audio({
+    file: songs?.map((el) => el?.preview_url)[0],
     loop: true,
     shuffle: true,
+    preload: true,
   });
   const play = () => {
     audio.play();
