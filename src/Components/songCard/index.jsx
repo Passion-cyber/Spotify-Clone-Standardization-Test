@@ -1,10 +1,11 @@
 import React from "react";
 import "../../Stylsheets/songCard.css";
-const SongCard = ({ el }) => {
-  const handlePlay = () => {};
-  console.log(el);
+const SongCard = ({ el, action}) => {
+  const handlePlaySong = ()=> [
+   action()
+  ]
   return (
-    <div className="song">
+    <div className="song" onClick={handlePlaySong}>
       <div className="song-image">
         <img src={el?.album?.images[0]?.url} alt="resuit-search-image" />
         <div className="playBtn"></div>

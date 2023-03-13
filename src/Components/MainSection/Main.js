@@ -21,7 +21,6 @@ import {
 } from "react-icons/tb";
 import { FaMusic } from "react-icons/fa";
 import Inputrange from "./Inputrange";
-import SearchResultCard, { converterToSeconds } from "./SearchResultCard";
 import Overview from "./overview";
 import SongCard from "../songCard";
 import SpotifyPlayerWrapper from "./player";
@@ -30,7 +29,7 @@ const Main = ({ userId }) => {
   const [searchartist, setSearchArtist] = useState("");
   const [data, setData] = useState(null);
   const [myPlaylist, setMyPlaylist] = useState([]);
-  
+  const [seekVal, setSeekVal] = useState(null)
   const [showSearchResult, setShowSearchResult] = useState(false);
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
 
@@ -134,14 +133,14 @@ const Main = ({ userId }) => {
         <div className="grid-songs">
           {" "}
           {data?.tracks?.items.map((el, i) => (
-            <SongCard key={i} el={el} />
+            <SongCard  key={i} el={el} action={()=>setSeekVal(i+1)} />
           ))}
         </div>
       ) : (
         <Overview songs={myPlaylist} />
       )}
       <section className="play-station">
-        <SpotifyPlayerWrapper accessToken={spotifyTKN} songs={showSearchResult ? data?.tracks?.items : myPlaylist}/>
+        <SpotifyPlayerWrapper seekVal={seekVal} accessToken={spotifyTKN} songs={showSearchResult ? data?.tracks?.items : myPlaylist}/>
       </section>
     </main>
   );

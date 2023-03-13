@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 
-export default function SpotifyPlayerWrapper({ accessToken, songs }) {
+export default function SpotifyPlayerWrapper({ accessToken, songs, seekVal }) {
   const [count, setCount] = useState(1);
   const trackUri = songs[count - 1]?.uri ?? [];
 
@@ -18,7 +18,11 @@ export default function SpotifyPlayerWrapper({ accessToken, songs }) {
     setCount((prev) => prev - 1);
   };
 
-
+  useEffect(() => {
+    if (seekVal === null) return;
+    setCount(seekVal);
+    alert("set");
+  }, [seekVal]);
 
   if (!accessToken) return null;
   return (
@@ -29,7 +33,7 @@ export default function SpotifyPlayerWrapper({ accessToken, songs }) {
         if (!state.isPlaying) setPlay(false);
       }}
       play={play}
-      uris={trackUri }
+      uris={trackUri}
     />
   );
 }
