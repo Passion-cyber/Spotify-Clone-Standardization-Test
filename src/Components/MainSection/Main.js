@@ -24,16 +24,19 @@ import Inputrange from "./Inputrange";
 import SearchResultCard, { converterToSeconds } from "./SearchResultCard";
 import Overview from "./overview";
 import SongCard from "../songCard";
+import SpotifyPlayerWrapper from "./player";
 
 const Main = ({ userId }) => {
   const [searchartist, setSearchArtist] = useState("");
   const [data, setData] = useState(null);
   const [myPlaylist, setMyPlaylist] = useState([]);
-
+  
   const [showSearchResult, setShowSearchResult] = useState(false);
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
 
-  // loading playlist
+
+
+  // making search request
   useEffect(() => {
     let mounted = true;
     const fetchUser = async () => {
@@ -49,6 +52,7 @@ const Main = ({ userId }) => {
           },
         });
         setData(data);
+
       } catch (error) {
         console.log(error);
       }
@@ -88,7 +92,7 @@ const Main = ({ userId }) => {
     if (mounted && userId?.length > 1) fetchUserPlaylist();
     return () => (mounted = false);
   }, [userId]);
-
+//  toggle search results and overview
   useEffect(() => {
     if (searchartist.length < 1) {
       setShowSearchResult(false);
@@ -137,7 +141,7 @@ const Main = ({ userId }) => {
         <Overview songs={myPlaylist} />
       )}
       <section className="play-station">
-        <Player songs={myPlaylist} />
+        <SpotifyPlayerWrapper accessToken={spotifyTKN} songs={showSearchResult ? data?.tracks?.items : myPlaylist}/>
       </section>
     </main>
   );
@@ -147,7 +151,7 @@ export default Main;
 
 const Player = ({ songs }) => {
   const [playing, setPlaying] = useState(false);
-  
+
   const audio = Audio({
     file: songs?.map((el) => el?.preview_url)[0],
     loop: true,
