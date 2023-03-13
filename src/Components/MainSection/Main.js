@@ -1,4 +1,4 @@
-import { Audio } from "ts-audio";
+import { AudioPlaylist } from "ts-audio";
 import React, { useEffect, useState } from "react";
 import {
   BsArrowLeft,
@@ -13,9 +13,6 @@ import {
   BsRepeat,
 } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
-import { AiOutlineRight } from "react-icons/ai";
-import PlaylistCards from "./PlaylistCards";
-import PlaylistTitleCard from "./PlaylistTitleCard";
 import "../../Stylsheets/Main.css";
 import axios from "axios";
 import {
@@ -25,13 +22,16 @@ import {
 import { FaMusic } from "react-icons/fa";
 import Inputrange from "./Inputrange";
 import SearchResultCard, { converterToSeconds } from "./SearchResultCard";
+import Overview from "./overview";
+import SongCard from "../songCard";
 
-const Main = ({ setToken }) => {
+const Main = ({ userId }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [searchartist, setSearchArtist] = useState("");
   const [data, setData] = useState(null);
-  const [songs, setSongs] = useState([]);
-  const [showSearchResult, setShowSearchResult] = useState(true);
+  const [myPlaylist, setMyPlaylist] = useState([]);
+
+  const [showSearchResult, setShowSearchResult] = useState(false);
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
 
   // loading playlist
@@ -57,41 +57,52 @@ const Main = ({ setToken }) => {
     if (mounted) fetchUser();
     return () => (mounted = false);
   }, [searchartist]);
-  // loading playlist
+
+  // Fetching User's playlist
   useEffect(() => {
     let mounted = true;
-    const fetchUser = async () => {
+    const fetchUserPlaylist = async () => {
       try {
-        const { data } = await axios("https://api.spotify.com/v1/search", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + spotifyTKN,
-          },
-          params: {
-            q: "6Lack",
-            type: "track",
-          },
-        });
-
-        setSongs(data);
+        const { data } = await axios(
+          `https://api.spotify.com/v1/users/${userId}/playlists`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + spotifyTKN,
+            },
+          }
+        );
+        if (data?.items?.length > 1) {
+          const res = await axios.get(data?.items?.reverse()[0]?.tracks?.href, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + spotifyTKN,
+            },
+          });
+          const tracks = res?.data;
+          setMyPlaylist(tracks?.items?.map((track) => track?.track));
+        }
       } catch (error) {
         console.log(error);
       }
     };
-    if (mounted) fetchUser();
+    if (mounted && userId?.length > 1) fetchUserPlaylist();
     return () => (mounted = false);
-  }, []);
+  }, [userId]);
+
   // Closing the drop down menu on clicking a particular song
   const closeDropDownMenu = () => {
     setIsDropDownOpen(!isDropDownOpen);
   };
 
-  // Closing the drop down menu when the input is not on focus
-  const handleBlur = () => {
-    const blurryEl = document.querySelector(".searchDropdown");
-    blurryEl.classList.toggle("open");
-    setSearchArtist("");
-  };
+  useEffect(() => {
+    if (searchartist.length < 1) {
+      setShowSearchResult(false);
+    } else {
+      setShowSearchResult(true);
+    }
+  }, [searchartist]);
+
   return (
     <main className="main-container">
       {/* search box  */}
@@ -114,110 +125,28 @@ const Main = ({ setToken }) => {
               type="text"
               className="inputField"
               placeholder="Search for artists, songs and ..."
-              onBlur={handleBlur}
               onChange={(e) => {
                 setSearchArtist(e.target.value);
                 setIsDropDownOpen(false);
               }}
             />
           </div>
-          <div
-            className={`searchDropdown ${
-              searchartist.length >= 1 && !isDropDownOpen && "open"
-            }`}
-          >
-            {data?.tracks?.items.map((el, i) => (
-              <SearchResultCard
-                key={i}
-                el={el}
-                closeSearchModal={closeDropDownMenu}
-                setShowSearchResult={setShowSearchResult}
-                showSearchResult={showSearchResult}
-              />
-            ))}
-          </div>
+  
         </div>
       </section>
-
-      <section className="trending">
-        <h2 className="trending-text">What's hot 🔥</h2>
-        <div className="trending-zone">
-          <h2 className="trending-header">Trending</h2>
-          <div className="icon-section">
-            <h3 className="trending-icons"> More</h3>
-            <span>
-              <AiOutlineRight />
-            </span>
-          </div>
+      {showSearchResult ? (
+        <div className="grid-songs">
+          {" "}
+          {data?.tracks?.items.map((el, i) => (
+            <SongCard   key={i}
+            el={el}/>
+          ))}
         </div>
-      </section>
-      {/* banner section  */}
-      <section className="photography">
-        <div className="photography-container">
-          <h2 className="photography-artist">Artist</h2>
-          <section className="wordings">
-            <p className="ontop">on Top</p>
-            <p className="oftheworld">of The World</p>
-          </section>
-          <div className="photo-bottom-container">
-            <div className="photography-buttons">
-              <button className="primary-btn">play</button>
-              <button className="secondary-btn">follow</button>
-            </div>
-            <div className="monthly-listners">
-              <h2 className="monthly">Monthly Listners</h2>
-              <h2 className="figures"> 32.059</h2>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* playlist wrap */}
-      <section className="my-playlist">
-        <div className="trending-zone">
-          <h2 className="trending-header">My Playlist</h2>
-          <div className="icon-section">
-            <h3 className="trending-icons"> Show All</h3>
-          </div>
-        </div>
-
-        <PlaylistTitleCard
-          number={"#"}
-          title={"TITLE"}
-          artist={"ARTIST"}
-          time={"TIME"}
-          album={"ALBUM"}
-        />
-        {showSearchResult ? (
-          <section className="main-scrollbar">
-            {data?.tracks?.items.map((_, i) => (
-              <PlaylistCards
-                number={i + 1}
-                title={_?.name.substring(0, 15) + "..."}
-                artist={_?.artists[0]?.name}
-                time={converterToSeconds(_?.duration_ms)}
-                album={_?.album?.name}
-                key={i}
-              />
-            ))}
-          </section>
-        ) : (
-          <section className="main-scrollbar">
-            {songs?.tracks?.items.map((_, i) => (
-              <PlaylistCards
-                number={i + 1}
-                title={_?.name.substring(0, 15) + "..."}
-                artist={_?.artists[0]?.name}
-                time={converterToSeconds(_?.duration_ms)}
-                album={_?.album?.name}
-                key={i}
-              />
-            ))}
-          </section>
-        )}
-      </section>
+      ) : (
+        <Overview songs={myPlaylist} />
+      )}
       <section className="play-station">
-        <Player songs={songs?.tracks?.items ?? []} />
+        <Player songs={myPlaylist ?? []} />
       </section>
     </main>
   );
@@ -227,18 +156,24 @@ export default Main;
 
 const Player = ({ songs }) => {
   const [playing, setPlaying] = useState(false);
-  const [count, setCount] = useState(1);
-  const audio = Audio({
-    file: songs[count - 1]?.preview_url,
+  const audio = AudioPlaylist({
+    files: songs?.map((el) => el?.preview_url) ?? [],
+    loop: true,
+    shuffle: true,
   });
   const play = () => {
     audio.play();
     setPlaying(!playing);
   };
   const pause = () => {
-    audio.pause();
-    setPlaying(playing);
+    audio.stop();
+    setPlaying(!playing);
+    alert("called");
   };
+  const next = () => {
+    audio.next();
+  };
+  const prev = () => audio.prev;
 
   return (
     <section className="player-container">
@@ -261,7 +196,7 @@ const Player = ({ songs }) => {
           <i>
             <BsRepeat />
           </i>
-          <button className="prev-btn">
+          <button className="prev-btn" onClick={prev}>
             <TbPlayerTrackPrevFilled />
           </button>
           {playing ? (
@@ -273,7 +208,7 @@ const Player = ({ songs }) => {
               <BsFillPlayCircleFill />
             </button>
           )}
-          <button className="next-btn">
+          <button className="next-btn" onClick={next}>
             <TbPlayerTrackNextFilled />
           </button>
           <i>

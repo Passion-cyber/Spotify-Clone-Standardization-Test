@@ -1,15 +1,15 @@
-const PlaylistCards = ({number, title, artist, time, album}) => {
+const PlaylistCards = ({ number, title, artist, time, album }) => {
   return (
-    <>    
-    <ul className='playlist-container'>
-        <li className="serial-number">{number}</li>
-        <li className="title">{title}</li>
-        <li className="artist">{artist}</li>
-        <li className="time">{time}</li>
-        <li className="album">{album}</li>
-    </ul>
+    <>
+      <div className="playlist-container">
+        <div className="serial-number">{number}</div>
+        <div className="title">{title}</div>
+        <div className="artist">{artist}</div>
+        <div className="time">{time}</div>
+        <div className="album">{album}</div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default PlaylistCards
+export default PlaylistCards;

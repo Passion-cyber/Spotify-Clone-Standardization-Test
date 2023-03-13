@@ -1,8 +1,11 @@
 .main-container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: fit-content;
   padding: 0 1rem;
+  padding-top: 7rem;
+  background-color: var(--secondary-color);
 }
 
 ul,
@@ -17,8 +20,14 @@ li {
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  margin: 1.5rem 0;
-  position: relative;
+  margin: 1.2rem 0;
+  position: fixed;
+  /* border: 1px solid red; */
+  top: 0rem;
+  z-index: 20;
+  width: calc(100vw - 580px);
+  background-color: var(--secondary-color);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
 }
 
 .search-icons {
@@ -240,8 +249,8 @@ section .wordings {
 .main-scrollbar {
   width: inherit;
   overflow-y: auto;
-  border: 1px solid red;
-  height: calc(100vh - 430px);
+  height: calc(100vh - 450px);
+  padding: 0 0.6rem;
 }
 
 .main-scrollbar::-webkit-scrollbar {
@@ -253,44 +262,83 @@ section .wordings {
 }
 
 .playlist-container {
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(5, 1fr);
   font-size: 1.5rem;
-  font-weight: 300;
-  padding: 1rem 1.7rem;
+  font-weight: 500;
+  padding: 1.6rem 1.7rem;
   cursor: pointer;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   text-overflow: ellipsis;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 1.3rem;
 }
 
 .playlist-container:hover {
-  padding: 1rem 1.7rem;
-  background-color: var(--white-color);
-  transform: scale(1.03, 1.07);
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(34, 60, 80, 0.2);
+  transform: translateY(-3px) scale(1.01);
 }
 
 .titlecard-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 600;
   padding: 1rem 1.7rem;
+}
+
+.titlecard-container .serial-number,
+.playlist-container .serial-number {
+  margin-right: 2rem;
+}
+
+.titlecard-container .title,
+.playlist-container .title {
+  min-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 2rem;
+}
+
+.titlecard-container .artist,
+.playlist-container .artist {
+  min-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 2rem;
+}
+
+.titlecard-container .time,
+.playlist-container .time {
+  margin-right: 2rem;
+}
+
+.titlecard-container .album,
+.playlist-container .album {
+  min-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 2rem;
 }
 
 /* play-station */
 .play-station {
-  /* border: 1px solid red; */
-  height: 85px;
-  width: calc(100% - 2rem);
+  height: 90px;
+  width: calc(100vw - 580px);
   border: 1px solid var(white);
   background-color: var(--white-color);
   padding: 1rem;
   border-radius: 1rem;
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   display: flex;
   flex-direction: column;
+  /* border: 1px solid red; */
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
 }
 
 .music-player-buttons {
@@ -370,11 +418,91 @@ section .wordings {
 .center-buttons > * {
   font-size: 2rem;
 }
+.grid-songs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(218px, 1fr));
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .main-container {
     width: 100%;
-    height: 100vh;
-    padding: 0 1rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid purple;
+  }
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  /* search-container */
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    position: relative;
+    width: calc(100vw - 3rem);
+    padding: 1rem;
+  }
+
+  .search-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    /* border: 1px solid red; */
+  }
+
+  .search-icons .right-arrow,
+  .search-icons .left-arrow {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .input-address {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 2rem;
+  }
+
+  .input-address:hover,
+  .input-address:focus {
+    outline: none;
+    border: none;
+    background-color: var(--white-color);
+  }
+
+  .input-address .inputField {
+    border: 0;
+    outline: none;
+    color: #3d3b3b;
+    width: 100%;
+  }
+
+  .input-address .search-button {
+    font-size: 2rem;
+  }
+
+  .input-address .inputField::placeholder {
+    font-size: 1.5rem;
+    color: gray;
   }
 }

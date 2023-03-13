@@ -1,8 +1,7 @@
 .navbar-container {
   position: sticky;
   background-color: var(--white-color);
-
-  width: 300px;
+  width: 350px;
   height: 100vh;
   padding: 0 1rem;
   left: 0;
@@ -13,20 +12,22 @@
 
 .navigation {
   position: relative;
-  padding: 1rem;
+  padding: 2rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
 }
-.nav-wrap {
-  height: calc(100% - (40px + 2rem) - 3rem);
-  overflow: auto;
-}
 
 .navigation i {
   font-size: 2rem;
   cursor: pointer;
+}
+
+.nav-wrap {
+  height: calc(100% - (40px + 1rem) - 3rem);
+  overflow: auto;
+  width: 100%;
 }
 
 .wrap {
@@ -40,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: left;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem;
   border-radius: 0.7rem;
   gap: 2rem;
   cursor: pointer;
@@ -52,7 +53,7 @@
   content: "";
   position: absolute;
   top: 0;
-  right: 0%;
+  right: 2px;
   border-radius: 0.7rem;
   width: 2px;
   height: 100%;
@@ -60,11 +61,7 @@
   z-index: 10;
 }
 
-.individual-cards:hover {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-}
-
+.individual-cards:hover,
 .individual-cards.active {
   background-color: var(--primary-color);
   color: var(--secondary-color);
@@ -72,10 +69,9 @@
 
 .navbar-profile {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 4rem);
   border-top: 2px solid rgb(213, 205, 205);
   padding: 1rem 2rem;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -114,7 +110,7 @@
 .navbar-text {
   letter-spacing: 2px;
   padding: 0 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .header-card {
@@ -196,7 +192,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .navbar-container {
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;

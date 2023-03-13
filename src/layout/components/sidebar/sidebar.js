@@ -7,16 +7,16 @@ import { Nav_Items } from "../../../Ultilities";
 import { GrTextAlignRight } from "react-icons/gr";
 import { FaChevronRight } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import { Navigate, redirect, Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const SideNavbar = ({ setToken }) => {
+const SideNavbar = ({ setUserId }) => {
   const spotifyTKN = window.localStorage.getItem("spotifyTKN");
   const [data, setData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const [isActive, setIsActive] = useState(false);
   const logout = () => {
-    setToken(null);
     window.localStorage.removeItem("spotifyTKN");
     navigate("/");
   };
@@ -24,33 +24,27 @@ const SideNavbar = ({ setToken }) => {
   useEffect(() => {
     let mounted = true;
     const fetchUser = async () => {
-      const { data } = await axios.get("https://api.spotify.com/v1/me", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + spotifyTKN,
-        },
-      });
-      setData(data);
-      console.log(data);
+      try {
+        const { data } = await axios.get("https://api.spotify.com/v1/me", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + spotifyTKN,
+          },
+        });
+        setUserId(data?.id);
+        setData(data);
+      } catch (error) {
+        logout();
+        toast.error("Token expired, please login");
+      }
     };
-    if (mounted) fetchUser();
+    if (mounted && spotifyTKN?.length > 1) fetchUser();
     return () => (mounted = false);
-  }, []);
-  // revalidating token
-  useEffect(() => {
-    // define the callback
-    const handleLogout = () => {
-      logout();
-      toast.error("Token Expired, please authenticate");
-    };
+  }, [spotifyTKN]);
 
-    // set interval to logout every hour (in milliseconds)
-    const interval = setInterval(() => {
-      handleLogout();
-    }, 3600000);
-    // cleanup function to clear interval when component unmounts
-    return () => clearInterval(interval);
-  }, []);
+  const handleACtiveToggle = () => {
+    setIsActive(!isActive);
+  };
   return (
     <div className="navbar-container">
       <div className="navigation">
@@ -67,14 +61,26 @@ const SideNavbar = ({ setToken }) => {
           ) : text ? (
             <Navbarlogo title={title} text={text} key={i} icon={<Icon />} />
           ) : (
-            <NavbarCards title={title} icon={<Icon />} key={i} />
+            <NavbarCards
+              className={`wrap ${isActive && "active"}`}
+              onClick={handleACtiveToggle}
+              title={title}
+              icon={<Icon />}
+              key={i}
+            />
           )
         )}
       </div>
 
       <div className="navbar-profile" onClick={() => setIsOpen(!isOpen)}>
         <div className="image">
-          <img src={data?.images?.[0]?.url ?? "https://i.scdn.co/image/ab6775700000ee8554123d23b994c6c3dc87d924"} alt="profile-cover" />
+          <img
+            src={
+              data?.images?.[0]?.url ??
+              "https://i.scdn.co/image/ab6775700000ee8554123d23b994c6c3dc87d924"
+            }
+            alt="profile-cover"
+          />
         </div>
         <h2 className="profile-text">{data?.display_name ?? "PassionCyber"}</h2>
         <h2 className="nav-profile-icon">

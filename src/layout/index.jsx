@@ -3,9 +3,8 @@ import SideNavbar from "./components/sidebar/sidebar";
 import "../Stylsheets/layout.css";
 import Asidebar from "../layout/components/AsideBar/Asidebar";
 import Main from "../Components/MainSection/Main";
-const AppLayout = ({ children }) => {
-  const [token, setToken] = useState();
-
+const AppLayout = () => {
+  const [userId, setUserId] = useState(null);
   useEffect(() => {
     const hash = window.location.hash;
     let spotifyTKN = window.localStorage.getItem("spotifyTKN");
@@ -18,14 +17,13 @@ const AppLayout = ({ children }) => {
       window.location.hash = "";
       window.localStorage.setItem("spotifyTKN", spotifyTKN);
     }
-    setToken(spotifyTKN);
   }, []);
 
   return (
     <div className="layout-wrap">
-      <SideNavbar setToken={setToken} />
+      <SideNavbar userId={userId} setUserId={setUserId} />
       <div className="children-wrap">
-        <Main setToken={setToken} />
+        <Main userId={userId} />
       </div>
       <Asidebar />
     </div>
