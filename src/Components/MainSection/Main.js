@@ -72,7 +72,7 @@ const Main = ({ userId }) => {
             },
           }
         );
-        if (data?.items?.length > 1) {
+        if (data?.items?.length >= 1) {
           const res = await axios.get(data?.items?.reverse()[0]?.tracks?.href, {
             headers: {
               "Content-Type": "application/json",
@@ -131,15 +131,13 @@ const Main = ({ userId }) => {
               }}
             />
           </div>
-  
         </div>
       </section>
       {showSearchResult ? (
         <div className="grid-songs">
           {" "}
           {data?.tracks?.items.map((el, i) => (
-            <SongCard   key={i}
-            el={el}/>
+            <SongCard key={i} el={el} />
           ))}
         </div>
       ) : (
