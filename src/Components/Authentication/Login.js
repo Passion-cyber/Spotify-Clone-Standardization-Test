@@ -2,7 +2,8 @@ import React from "react";
 import "../../Stylsheets/Login.css";
 import track from "../../Assets/images/spotify-logo.png";
 const REACT_APP_CLIENT_ID = "d7208688b03147aebe8d5aeae751497f";
-const REACT_APP_REDIRECT_URL = "http://localhost:3000/authenticated";
+const REACT_APP_REDIRECT_URL =
+  "https://spotify-clone-nine-tau.vercel.app/authenticated";
 const REACT_APP_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REACT_APP_RESPONSE_TYPE = "token";
 
